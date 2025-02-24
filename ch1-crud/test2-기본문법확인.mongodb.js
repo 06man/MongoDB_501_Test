@@ -272,7 +272,7 @@ db.users.find({ place: { $exists: true } });
 // db.collection.find({ fieldName: { $nin: [value1, value2] } });
 // 예제
 
-// db.users.find({ age: { $in: [25, 30, 35] } });
+db.users.find({ age: { $in: [25, 30, 35] } });
 // 실무 활용
 // 특정 연령대의 사용자만 필터링.
 
@@ -284,7 +284,7 @@ db.users.find({ place: { $exists: true } });
 // db.collection.find({ field: { $lte: value } });
 // 예제
 
-// db.users.find({ age: { $gte: 18, $lte: 30 } });
+db.users.find({ age: { $gte: 18, $lte: 30 } });
 // 실무 활용
 // 특정 연령대, 가격 범위 등의 데이터 검색.
 
@@ -297,14 +297,54 @@ db.users.find({ place: { $exists: true } });
 // db.collection.find({ $and: [condition1, condition2] });
 // 예제
 
-// db.users.find({ $or: [{ age: 25 }, { name: "Alice" }] });
+db.users.find({ $or: [{ age: 25 }, { name: "Alice" }] });
+db.users.find({ $and: [{ age: 25 }, { name: "Alice" }] });
 // 실무 활용
 // 여러 개의 필터링 조건을 적용할 때.
 
+// 16
+// 배열에 값 추가($push)
+// 기본 문법
 
+// db.collection.updateOne({ filter }, { $push: { arrayField: value } });
+// 예제
 
+// db.users.updateOne({ name: "Alice" }, { $push: { hobbies: "Reading" } });
+// 실무 활용
+// 사용자 관심사 업데이트.
 
+// 17
+// 배열에서 값 제거($pull)
+// 기본 문법
 
+// db.collection.updateOne({ filter }, { $pull: { arrayField: value } });
+// 예제
+
+// db.users.updateOne({ name: "Alice" }, { $pull: { hobbies: "Reading" } });
+// 실무 활용
+// 사용자 관심사 제거.
+
+// 18
+// 필드 삭제($unset)
+// 기본 문법
+
+// db.collection.updateOne({ filter }, { $unset: { field: "" } });
+// 예제
+
+// db.users.updateOne({ name: "Alice" }, { $unset: { age: "" } });
+// 실무 활용
+// 사용되지 않는 데이터 필드 삭제.
+
+// 19
+// 필드 이름 변경($rename)
+// 기본 문법
+
+// db.collection.updateMany({}, { $rename: { "oldField": "newField" } });
+// 예제
+
+// db.users.updateMany({}, { $rename: { "fullName": "name" } });
+// 실무 활용
+// 데이터 구조 변경 시 필드명을 일괄 수정.
 
 
 
