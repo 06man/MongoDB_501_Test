@@ -357,7 +357,7 @@ db.users.find()
 // db.collection.drop();
 // 예제
 
-// db.users.drop();
+db.users.drop();
 // 실무 활용
 // 필요 없는 컬렉션 삭제.
 
@@ -369,7 +369,7 @@ db.users.find()
 // 예제
 
 // use("testDB");
-// db.dropDatabase();
+db.dropDatabase();
 // 실무 활용
 // 개발 환경에서 테스트 데이터베이스 삭제.
 
