@@ -73,3 +73,40 @@ for (i = 0; i < 1000; i++) {
     db.testCollection.insertOne({ x: i });
 }
 db.testCollection.find();
+
+
+// 2
+// 1. 데이터베이스 선택 (use)
+// 기본 문법
+
+// use("databaseName");
+// 특정 데이터베이스를 선택.
+// use는 새로운 데이터베이스를 생성하지 않으며, 컬렉션이 추가될 때 생성됨.
+// 예제
+
+// use("testBlog");
+// testBlog 데이터베이스를 선택.
+
+// 주의사항, use 사용 안하면, 기본 test 디비 사용함.
+
+// 3
+//  컬렉션에 문서 삽입 (insertOne, insertMany)
+// 기본 문법
+
+// db.collection.insertOne(document);
+// db.collection.insertMany([document1, document2, ...]);
+// 단일 문서 또는 여러 문서를 컬렉션에 삽입.
+
+// 예제
+db.users.insertOne(
+    { name: "Alice", age: 25 }
+);
+// db.users.insertMany([{ name: "Bob", age: 30 }, { name: "Charlie", age: 35 }]);
+
+// 출력 결과
+// json
+
+// { "acknowledged": true, "insertedId": ObjectId("6578a3b2a3f93c1d3e9f7b22") }
+// 실무 활용
+// 회원 가입 시 사용자 정보 저장.
+// 로그 데이터 저장.
