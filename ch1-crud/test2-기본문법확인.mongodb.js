@@ -241,7 +241,7 @@ db.users.find({}, { name: 1, _id: 0 });
 // db.collection.countDocuments(query);
 // 예제
 
-// db.users.countDocuments({ age: { $gte: 30 } });
+db.users.countDocuments({ age: { $gte: 30 } });
 // 출력 결과
 // json
 // 10
@@ -256,10 +256,58 @@ db.users.find({}, { name: 1, _id: 0 });
 // 특정 필드가 존재하는 문서를 조회.
 // 예제
 
-// db.users.find({ age: { $exists: true } });
+db.users.find({ place: { $exists: true } });
 // 출력 결과
 // json
 
 // { "_id": ObjectId("6578a3b2a3f93c1d3e9f7b22"), "name": "Alice", "age": 25 }
 // 실무 활용
 // 특정 필드가 있는 데이터만 조회할 때 사용(예: 이메일이 등록된 사용자 찾기).
+
+// 13
+//  특정 값 포함 여부 ($in, $nin)
+// 기본 문법
+
+// db.collection.find({ fieldName: { $in: [value1, value2] } });
+// db.collection.find({ fieldName: { $nin: [value1, value2] } });
+// 예제
+
+// db.users.find({ age: { $in: [25, 30, 35] } });
+// 실무 활용
+// 특정 연령대의 사용자만 필터링.
+
+// 14
+// 범위 조건 검색 ($gte, $lte)
+// 기본 문법
+
+// db.collection.find({ field: { $gte: value } });
+// db.collection.find({ field: { $lte: value } });
+// 예제
+
+// db.users.find({ age: { $gte: 18, $lte: 30 } });
+// 실무 활용
+// 특정 연령대, 가격 범위 등의 데이터 검색.
+
+
+// 15
+// 복합 조건 검색 ($or, $and)
+// 기본 문법
+
+// db.collection.find({ $or: [condition1, condition2] });
+// db.collection.find({ $and: [condition1, condition2] });
+// 예제
+
+// db.users.find({ $or: [{ age: 25 }, { name: "Alice" }] });
+// 실무 활용
+// 여러 개의 필터링 조건을 적용할 때.
+
+
+
+
+
+
+
+
+
+
+
