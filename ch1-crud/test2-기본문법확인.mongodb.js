@@ -1,9 +1,10 @@
 // MongoDB Capped Collection 사용 개념 및 예제
 
 // 1. 기본 문법 및 개념
-createCollection(name, options)
+// createCollection(name, options)
 // : MongoDB에서 새로운 컬렉션을 생성하는 메서드.
-// Capped Collection: 저장 공간이 제한된(fixed - size) 컬렉션으로, 오래된 데이터가 자동으로 삭제됨.
+// Capped Collection: 저장 공간이 제한된(fixed - size) 
+// 컬렉션으로, 오래된 데이터가 자동으로 삭제됨.
 
 //     옵션:
 // capped: true → 컬렉션을 Capped Collection으로 설정.
@@ -13,7 +14,8 @@ createCollection(name, options)
 
 // 컬렉션 생성
 
-// db.createCollection("cappedC", {capped: true, size: 10000 });
+// db.createCollection("cappedC", 
+// {capped: true, size: 10000 });
 // cappedC라는 이름의 컬렉션을 생성.
 
 // 최대 10,000바이트 크기의 공간을 유지.
@@ -55,7 +57,9 @@ createCollection(name, options)
 db.createCollection("cappedC", { capped: true, size: 10000 });
 db.cappedC.insertOne({ x: 1 });
 db.cappedC.find();
-
+// 반복문으로, 0 부터 999번까지 데이터  추가시, 
+// 오래된 데이터를 삭제 후, 새로운 데이터를 추가해서, 
+// 기존데이터 , 0 ~ 655 번까지 삭제후, 그 이후 데이터가 새롭게 추가.
 for (i = 0; i < 1000; i++) {
     db.cappedC.insertOne({ x: i });
 }
@@ -63,3 +67,9 @@ for (i = 0; i < 1000; i++) {
 db.cappedC.find();
 db.cappedC.storageSize();
 db.cappedC.stats();
+
+// 일반 컬렉션에, 반복문으로 데이터 1000개 추가 해보기. 비교. 
+for (i = 0; i < 1000; i++) {
+    db.testCollection.insertOne({ x: i });
+}
+db.testCollection.find();
