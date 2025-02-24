@@ -99,10 +99,10 @@ db.testCollection.find();
 
 // 예제
 db.users.insertOne(
-    { name: "Alice", age: 25 }
+    { name: "Alice4", age: 22 }
 );
 db.users.insertOne(
-    { name: "Alice", age: 25, place: "부산" }
+    { name: "Alice5", age: 33, place: "부산" }
 );
 // db.users.insertMany([{ name: "Bob", age: 30 }, { name: "Charlie", age: 35 }]);
 
@@ -212,7 +212,7 @@ db.users.deleteMany({ age: { $lt: 25 } });
 // db.collection.find().limit(n);
 // 예제
 
-// db.users.find().sort({ age: -1 }).limit(5);
+db.users.find().sort({ age: -1 }).limit(3);
 // 출력 결과
 // 나이가 많은 사용자 5명을 조회.
 // 실무 활용
@@ -226,10 +226,40 @@ db.users.deleteMany({ age: { $lt: 25 } });
 // db.collection.find(query, { field1: 1, field2: 1 });
 // 예제
 
-// db.users.find({}, { name: 1, _id: 0 });
+db.users.find({}, { name: 1, _id: 0 });
 // 출력 결과
 // json
 
 // { "name": "Alice" }
 // 실무 활용
 // 특정 필드만 가져와서 API 응답 최적화.
+
+// 11
+// 존재 여부 확인 (countDocuments)
+// 기본 문법
+
+// db.collection.countDocuments(query);
+// 예제
+
+// db.users.countDocuments({ age: { $gte: 30 } });
+// 출력 결과
+// json
+// 10
+// 실무 활용
+// 특정 조건을 만족하는 문서 개수 파악.
+
+// 12
+// 필드 존재 여부 확인 ($exists)
+// 기본 문법
+
+// db.collection.find({ fieldName: { $exists: true } });
+// 특정 필드가 존재하는 문서를 조회.
+// 예제
+
+// db.users.find({ age: { $exists: true } });
+// 출력 결과
+// json
+
+// { "_id": ObjectId("6578a3b2a3f93c1d3e9f7b22"), "name": "Alice", "age": 25 }
+// 실무 활용
+// 특정 필드가 있는 데이터만 조회할 때 사용(예: 이메일이 등록된 사용자 찾기).
