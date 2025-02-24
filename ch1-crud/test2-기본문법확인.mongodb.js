@@ -132,6 +132,9 @@ db.user.insertMany([
 // 4
 // 3. 문서 조회 (find, findOne)
 // 기본 문법
+// db.collection.find(query, projection );
+// 쿼리 -> where, 조건문 ,
+// 프로젝션, -> 보고싶은 필드 정하기,
 
 // db.collection.find(query);
 // db.collection.findOne(query);
@@ -148,6 +151,55 @@ db.user.insertMany([
 // 실무 활용
 // 특정 사용자의 프로필 정보 가져오기.
 // 데이터 분석을 위한 특정 조건의 데이터 검색.
+db.user.find()
+db.user.find({}, {
+    _id: false,
+})
+db.user.find({}, {
+    _id: false,
+    username: true
+})
+
+// 5
+// 문서 업데이트 (updateOne, updateMany)
+// 기본 문법
+
+// db.collection.updateOne(filter, update);
+// db.collection.updateMany(filter, update);
+// updateOne() → 한 개의 문서만 변경.
+// updateMany() → 여러 개의 문서를 변경.
+// 예제
+
+// db.users.updateOne({ name: "Alice" }, { $set: { age: 26 } });
+// db.users.updateMany({ age: { $gte: 30 } }, { $set: { isAdult: true } });
+// 출력 결과
+// json
+
+// { "acknowledged": true, "matchedCount": 1, "modifiedCount": 1 }
+// 실무 활용
+// 사용자 정보 변경(예: 닉네임 변경).
+// 특정 그룹의 사용자 정보 일괄 업데이트.
+
+// 6
+// 문서 삭제(deleteOne, deleteMany)
+// 기본 문법
+
+// db.collection.deleteOne(filter);
+// db.collection.deleteMany(filter);
+// deleteOne() → 조건과 일치하는 첫 번째 문서 삭제.
+//     deleteMany() → 조건과 일치하는 모든 문서 삭제.
+//         예제
+
+// db.users.deleteOne({ name: "Alice" });
+// db.users.deleteMany({ age: { $lt: 18 } });
+// 출력 결과
+// json
+
+
+// { "acknowledged": true, "deletedCount": 1 }
+// 실무 활용
+// 특정 사용자 계정 삭제.
+// 일정 기간이 지난 로그 데이터 삭제.
 
 
 
