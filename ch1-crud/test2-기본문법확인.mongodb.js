@@ -170,8 +170,8 @@ db.user.find({}, {
 // updateMany() → 여러 개의 문서를 변경.
 // 예제
 
-// db.users.updateOne({ name: "Alice" }, { $set: { age: 26 } });
-// db.users.updateMany({ age: { $gte: 30 } }, { $set: { isAdult: true } });
+db.users.updateOne({ name: "Alice" }, { $set: { age: 26 } });
+db.users.updateMany({ age: { $gte: 20 } }, { $set: { isAdult: true } });
 // 출력 결과
 // json
 
@@ -179,6 +179,8 @@ db.user.find({}, {
 // 실무 활용
 // 사용자 정보 변경(예: 닉네임 변경).
 // 특정 그룹의 사용자 정보 일괄 업데이트.
+
+
 
 // 6
 // 문서 삭제(deleteOne, deleteMany)
@@ -190,8 +192,8 @@ db.user.find({}, {
 //     deleteMany() → 조건과 일치하는 모든 문서 삭제.
 //         예제
 
-// db.users.deleteOne({ name: "Alice" });
-// db.users.deleteMany({ age: { $lt: 18 } });
+db.users.deleteOne({ name: "Alice" });
+db.users.deleteMany({ age: { $lt: 25 } });
 // 출력 결과
 // json
 
@@ -201,6 +203,33 @@ db.user.find({}, {
 // 특정 사용자 계정 삭제.
 // 일정 기간이 지난 로그 데이터 삭제.
 
+// 7
+// 정렬 및 제한(sort, limit)
+// 기본 문법
 
+// db.collection.find().sort({ field: 1 });  // 오름차순
+// db.collection.find().sort({ field: -1 }); // 내림차순
+// db.collection.find().limit(n);
+// 예제
 
+// db.users.find().sort({ age: -1 }).limit(5);
+// 출력 결과
+// 나이가 많은 사용자 5명을 조회.
+// 실무 활용
+// 최신 등록된 회원 목록 출력.
+// 게시글 목록을 최신순으로 정렬.
 
+// 8
+// 필드 선택(Projection)
+// 기본 문법
+
+// db.collection.find(query, { field1: 1, field2: 1 });
+// 예제
+
+// db.users.find({}, { name: 1, _id: 0 });
+// 출력 결과
+// json
+
+// { "name": "Alice" }
+// 실무 활용
+// 특정 필드만 가져와서 API 응답 최적화.
