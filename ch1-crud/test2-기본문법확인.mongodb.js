@@ -101,6 +101,9 @@ db.testCollection.find();
 db.users.insertOne(
     { name: "Alice", age: 25 }
 );
+db.users.insertOne(
+    { name: "Alice", age: 25, place: "부산" }
+);
 // db.users.insertMany([{ name: "Bob", age: 30 }, { name: "Charlie", age: 35 }]);
 
 // 출력 결과
@@ -110,3 +113,42 @@ db.users.insertOne(
 // 실무 활용
 // 회원 가입 시 사용자 정보 저장.
 // 로그 데이터 저장.
+
+db.emp.insertOne({ eno: 1101, fname: 'JIMMY' });
+db.emp.insertOne({ eno: 1102, fname: 'ADAM', lname: 'KROLL' });
+db.emp.insertOne({ eno: 1103, fname: 'SMITH', job: 'CLERK' });
+db.emp.find()
+db.emp.find().sort({ eno: -1 })
+
+db.testCollection.insertOne({ _id: 1, x: 1 })
+db.testCollection.find().sort({ _id: 1 })
+
+db.user.insertMany([
+    { username: "Kei", password: 4321 },
+    { username: "Mijoo", password: 3212 },
+    { username: "Yein", password: 3123 },
+]);
+
+// 4
+// 3. 문서 조회 (find, findOne)
+// 기본 문법
+
+// db.collection.find(query);
+// db.collection.findOne(query);
+// find() → 여러 문서를 조회.
+// findOne() → 단일 문서를 조회.
+// 예제
+
+// db.users.find();
+// db.users.findOne({ name: "Alice" });
+// 출력 결과
+// json
+
+// { "_id": ObjectId("6578a3b2a3f93c1d3e9f7b22"), "name": "Alice", "age": 25 }
+// 실무 활용
+// 특정 사용자의 프로필 정보 가져오기.
+// 데이터 분석을 위한 특정 조건의 데이터 검색.
+
+
+
+
