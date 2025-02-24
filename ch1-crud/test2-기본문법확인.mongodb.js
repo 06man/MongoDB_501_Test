@@ -309,7 +309,8 @@ db.users.find({ $and: [{ age: 25 }, { name: "Alice" }] });
 // db.collection.updateOne({ filter }, { $push: { arrayField: value } });
 // 예제
 
-// db.users.updateOne({ name: "Alice" }, { $push: { hobbies: "Reading" } });
+db.users.updateOne({ name: "Alice" }, { $push: { hobbies: "Swimming" } });
+db.users.find()
 // 실무 활용
 // 사용자 관심사 업데이트.
 
@@ -320,7 +321,8 @@ db.users.find({ $and: [{ age: 25 }, { name: "Alice" }] });
 // db.collection.updateOne({ filter }, { $pull: { arrayField: value } });
 // 예제
 
-// db.users.updateOne({ name: "Alice" }, { $pull: { hobbies: "Reading" } });
+db.users.updateOne({ name: "Alice" }, { $pull: { hobbies: "Reading" } });
+db.users.find()
 // 실무 활용
 // 사용자 관심사 제거.
 
@@ -331,7 +333,8 @@ db.users.find({ $and: [{ age: 25 }, { name: "Alice" }] });
 // db.collection.updateOne({ filter }, { $unset: { field: "" } });
 // 예제
 
-// db.users.updateOne({ name: "Alice" }, { $unset: { age: "" } });
+db.users.updateMany({ name: "Alice" }, { $unset: { age: "" } });
+db.users.find()
 // 실무 활용
 // 사용되지 않는 데이터 필드 삭제.
 
@@ -342,12 +345,33 @@ db.users.find({ $and: [{ age: 25 }, { name: "Alice" }] });
 // db.collection.updateMany({}, { $rename: { "oldField": "newField" } });
 // 예제
 
-// db.users.updateMany({}, { $rename: { "fullName": "name" } });
+db.users.updateMany({}, { $rename: { "name": "FullName" } });
+db.users.find()
 // 실무 활용
 // 데이터 구조 변경 시 필드명을 일괄 수정.
 
+// 20
+// 컬렉션 삭제 (drop)
+// 기본 문법
 
+// db.collection.drop();
+// 예제
 
+// db.users.drop();
+// 실무 활용
+// 필요 없는 컬렉션 삭제.
+
+// 21
+// 데이터베이스 삭제 (dropDatabase)
+// 기본 문법
+
+// db.dropDatabase();
+// 예제
+
+// use("testDB");
+// db.dropDatabase();
+// 실무 활용
+// 개발 환경에서 테스트 데이터베이스 삭제.
 
 
 
