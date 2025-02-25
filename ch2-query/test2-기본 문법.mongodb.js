@@ -93,7 +93,7 @@ db.users.insertMany(
 
 
 // ✅ 1. 나이가 25 이상인 사용자 찾기
-
+db.users.find()
 db.users.find({ age: { $gte: 25 } })
 
 // ✅ 2. 이름이 "Kim"인 사용자 찾기
@@ -102,7 +102,9 @@ db.users.find({ name: "Kim" })
 
 // ✅ 3. 나이가 30 또는 40인 사용자 찾기
 
-db.users.find({ age: { $in: [30, 40] } })
+db.users.find({ age: { $in: [30, 40] } },
+    { _id: 0, name: 1, email: 1 }
+)
 
 // ✅ 4. 나이가 30 이상이고, 도시가 "Seoul"인 사용자 찾기
 
@@ -136,7 +138,7 @@ db.users.find({ gender: "남성", age: { $gte: 30 } })
 
 // ✅ 11. location 필드가 없는 사용자 찾기
 
-db.users.find({ location: { $exists: false } })
+db.users.find({ location: { $exists: true } })
 
 // ✅ 12. 이름이 "Lee"가 아닌 사용자 찾기
 
@@ -155,8 +157,13 @@ db.users.find({ tags: { $in: ["music", "travel"] } })
 db.users.find({ email: { $regex: "@gmail\\.com$" } })
 
 // ✅ 16. 특정 텍스트(예: "MongoDB")를 포함하는 사용자 찾기
-
-db.users.find({ $text: { $search: "MongoDB" } })
+db.users.find()
+db.users.find({ $text: { $search: "kim" } })
+db.users.createIndex({ name: "text", email: "text" })
+// index 조회, 
+db.users.getIndexes()
+// index 삭제, 
+db.users.dropIndex("name_text_description_text")
 
 // ⚠️ 주의: text index가 설정되어 있어야 사용 가능
 
