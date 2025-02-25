@@ -106,7 +106,7 @@ db.businesses.insertMany([
     { name: "Supermarket J", branches: [{ type: "Point", coordinates: [126.8955, 37.5552] }] }
 ])
 
-지리 공간 인덱스 생성
+// 지리 공간 인덱스 생성
 db.businesses.createIndex({ "branches.coordinates": "2dsphere" })
 
 // 1_1_$nearSphere(구형 거리 검색)
