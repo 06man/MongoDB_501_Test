@@ -34,6 +34,7 @@ print("인덱스 없이 검색 시간: " + (end - start) + "ms");
 1_Single - key Index(단일 필드 인덱스)
 
 db.products.createIndex({ category: 1 });
+db.users.getIndexes()
 
 ✅ 단일 필드 인덱스: category 필드에 대해 인덱스를 생성하여 검색 최적화
 
