@@ -40,8 +40,10 @@ _에서는 인덱스를 활용하여 데이터를 빠르게 검색하고
 
 1_인덱스 생성 및 조회
 📌 인덱스란?
-인덱스는 데이터베이스에서 검색 속도를 높이기 위해 사용되는 자료 구조입니다.
-인덱스를 사용하면 특정 필드에서 검색할 때 O(n) → O(log n) 으로 속도가 향상됩니다.
+인덱스는 데이터베이스에서 검색 속도를 높이기 위해
+사용되는 자료 구조입니다.
+인덱스를 사용하면 특정 필드에서 검색할 때
+O(n) → O(log n) 으로 속도가 향상됩니다.
 기본적으로 _id 필드에 자동 인덱스가 생성됩니다.
 
 
@@ -285,8 +287,8 @@ db.products.find({ name: "Laptop" }, { _id: 0, name: 1, price: 1 })
 위치 기반 검색이 필요한 경우 사용됨.
 
 db.locations.insertMany([
-  { name: "Seoul Tower", coordinates: [126.9784, 37.5665] },
-  { name: "Haeundae Beach", coordinates: [129.1611, 35.1587] },
+  { "name": "Seoul Tower", coordinates: [126.9784, 37.5665] },
+  { "name": "Haeundae Beach", coordinates: [129.1611, 35.1587] },
    { "name": "Namsan Park", "coordinates": [126.9921, 37.5512] },
   { "name": "Gyeongbokgung Palace", "coordinates": [126.9769, 37.5796] },
   { "name": "Lotte World", "coordinates": [127.0996, 37.5112] },
