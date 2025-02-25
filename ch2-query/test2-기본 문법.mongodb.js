@@ -158,7 +158,7 @@ db.users.find({ email: { $regex: "@gmail\\.com$" } })
 
 // ✅ 16. 특정 텍스트(예: "MongoDB")를 포함하는 사용자 찾기
 db.users.find()
-db.users.find({ $text: { $search: "kim" } })
+db.users.find({ $text: { $search: "kim lee" } })
 db.users.createIndex({ name: "text", email: "text" })
 // index 조회, 
 db.users.getIndexes()
