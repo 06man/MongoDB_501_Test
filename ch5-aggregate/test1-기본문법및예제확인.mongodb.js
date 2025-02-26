@@ -620,24 +620,27 @@ db.salesB.aggregate([{ $sample: { size: 1 } }])
 // 사용자의 현재 위치에서 가장 가까운 지점을 검색
 
 // 📌 문법
-db.locations.insertMany([
-    { name: "Seoul Tower", coordinates: [126.9784, 37.5665] },
-    { name: "Haeundae Beach", coordinates: [129.1611, 35.1587] },
-    { name: "Namsan Park", coordinates: [126.9921, 37.5512] },
-    { name: "Gyeongbokgung Palace", coordinates: [126.9769, 37.5796] },
-    { name: "Lotte World", coordinates: [127.0996, 37.5112] },
-    { name: "Jeju Island", coordinates: [126.5312, 33.4996] },
-    { name: "Busan Tower", coordinates: [129.0327, 35.1019] },
-    { name: "Incheon Airport", coordinates: [126.4512, 37.4602] },
-    { name: "Daegu Tower", coordinates: [128.5986, 35.8714] },
-    { name: "Gwangalli Beach", coordinates: [129.1202, 35.1554] },
-    { name: "Daejeon Expo Park", coordinates: [127.3845, 36.3745] },
-    { name: "Ulsan Grand Park", coordinates: [129.3151, 35.5438] },
-    { name: "Gimhae International Airport", coordinates: [128.9532, 35.1796] },
-    { name: "Seoraksan National Park", coordinates: [128.4657, 38.1195] },
-    { name: "Suwon Hwaseong Fortress", coordinates: [127.0093, 37.2851] }
-])
 
+db.locations.insertMany([
+    { name: "Seoul Tower", location: { type: "Point", coordinates: [126.9784, 37.5665] } },
+    { name: "Haeundae Beach", location: { type: "Point", coordinates: [129.1611, 35.1587] } },
+    { name: "Namsan Park", location: { type: "Point", coordinates: [126.9921, 37.5512] } },
+    { name: "Gyeongbokgung Palace", location: { type: "Point", coordinates: [126.9769, 37.5796] } },
+    { name: "Lotte World", location: { type: "Point", coordinates: [127.0996, 37.5112] } },
+    { name: "Jeju Island", location: { type: "Point", coordinates: [126.5312, 33.4996] } },
+    { name: "Busan Tower", location: { type: "Point", coordinates: [129.0327, 35.1019] } },
+    { name: "Incheon Airport", location: { type: "Point", coordinates: [126.4512, 37.4602] } },
+    { name: "Daegu Tower", location: { type: "Point", coordinates: [128.5986, 35.8714] } },
+    { name: "Gwangalli Beach", location: { type: "Point", coordinates: [129.1202, 35.1554] } },
+    { name: "Daejeon Expo Park", location: { type: "Point", coordinates: [127.3845, 36.3745] } },
+    { name: "Ulsan Grand Park", location: { type: "Point", coordinates: [129.3151, 35.5438] } },
+    { name: "Gimhae International Airport", location: { type: "Point", coordinates: [128.9532, 35.1796] } },
+    { name: "Seoraksan National Park", location: { type: "Point", coordinates: [128.4657, 38.1195] } },
+    { name: "Suwon Hwaseong Fortress", location: { type: "Point", coordinates: [127.0093, 37.2851] } }
+]);
+
+// 지리적 검색을 위해 2dsphere 인덱스 생성
+db.locations.createIndex({ location: "2dsphere" })
 
 db.locations.aggregate([
     {
