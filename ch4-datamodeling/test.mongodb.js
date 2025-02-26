@@ -124,6 +124,7 @@ db.users.insertOne({
     email: "alice@example.com",
     age: 25
 });
+db.users.find()
 
 // ✅ 유효한 데이터이므로 정상적으로 삽입되어야 함.
 
