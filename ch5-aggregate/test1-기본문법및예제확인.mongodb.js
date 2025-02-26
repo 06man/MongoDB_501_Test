@@ -665,17 +665,17 @@ db.locations.aggregate([
 
 // 📌 문법
 // // 샘플 데이터 삽입: products 컬렉션
-// db.products.insertMany([
-//   { _id: 1, name: "Laptop Pro", description: "A powerful laptop for professionals", price: 1500 },
-//   { _id: 2, name: "Laptop Air", description: "Lightweight and efficient laptop", price: 1200 },
-//   { _id: 3, name: "Desktop PC", description: "High performance desktop computer", price: 1000 },
-//   { _id: 4, name: "Gaming Laptop", description: "High-end gaming laptop with advanced graphics", price: 2000 },
-//   { _id: 5, name: "Smartphone", description: "Latest model smartphone with great features", price: 800 }
-// ]);
+db.products.insertMany([
+    { _id: 1, name: "Laptop Pro", description: "A powerful laptop for professionals", price: 1500 },
+    { _id: 2, name: "Laptop Air", description: "Lightweight and efficient laptop", price: 1200 },
+    { _id: 3, name: "Desktop PC", description: "High performance desktop computer", price: 1000 },
+    { _id: 4, name: "Gaming Laptop", description: "High-end gaming laptop with advanced graphics", price: 2000 },
+    { _id: 5, name: "Smartphone", description: "Latest model smartphone with great features", price: 800 }
+]);
 
-// db.products.createIndex({ description: "text" })
+db.products.createIndex({ description: "text" })
 
-// db.products.aggregate([{ $match: { $text: { $search: "laptop" } } }])
+db.products.aggregate([{ $match: { $text: { $search: "laptop" } } }])
 
 // ✅ 실무 활용 사례
 
@@ -722,14 +722,20 @@ db.locations.aggregate([
 // 해당 문서의 userId에 맞는 사용자 정보를 가져와
 // 사용자 정보만 출력하는 역할을 합니다.
 
-// db.salesB.aggregate([
-//   { $lookup: { from: "users",
-//   localField: "userId",
-//   foreignField: "_id",
-//   as: "userDetails" } },
-//   { $unwind: "$userDetails" },
-//   { $replaceRoot: { newRoot: "$userDetails" } }
-// ])
+db.salesB.aggregate([
+    {
+        $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "userDetails"
+        }
+    },
+
+    { $unwind: "$userDetails" },
+
+    { $replaceRoot: { newRoot: "$userDetails" } }
+])
 
 // 출력 예시
 // [
@@ -758,24 +764,24 @@ db.locations.aggregate([
 // 📌 문법
 // // 샘플 데이터 삽입: users2 컬렉션
 
-// db.users2.insertMany([
-//   { _id: 1, name: "Alice", role: "admin", email: "alice@example.com" },
-//   { _id: 2, name: "Bob", role: "user", email: "bob@example.com" },
-//   { _id: 3, name: "Charlie", role: "admin", email: "charlie@example.com" },
-//   { _id: 4, name: "David", role: "user", email: "david@example.com" }
-// ]);
+db.users2.insertMany([
+    { _id: 1, name: "Alice", role: "admin", email: "alice@example.com" },
+    { _id: 2, name: "Bob", role: "user", email: "bob@example.com" },
+    { _id: 3, name: "Charlie", role: "admin", email: "charlie@example.com" },
+    { _id: 4, name: "David", role: "user", email: "david@example.com" }
+]);
 
-// db.users2.aggregate([
-//   {
-//     $redact: {
-//       $cond: {
-//         if: { $eq: ["$role", "admin"] },
-//         then: "$$KEEP",
-//         else: "$$PRUNE"
-//       }
-//     }
-//   }
-// ])
+db.users2.aggregate([
+    {
+        $redact: {
+            $cond: {
+                if: { $eq: ["$role", "admin"] },
+                then: "$$KEEP",
+                else: "$$PRUNE"
+            }
+        }
+    }
+])
 
 // 출력_예시
 // [
@@ -809,17 +815,17 @@ db.locations.aggregate([
 
 // 📌 문법
 
-// db.salesB.aggregate([
-//   {
-//     $setWindowFields: {
-//       partitionBy: "$category",
-//       sortBy: { date: 1 },
-//       output: {
-//         runningTotal: { $sum: "$amount", window: { documents: ["unbounded", "current"] } }
-//       }
-//     }
-//   }
-// ])
+db.salesB.aggregate([
+    {
+        $setWindowFields: {
+            partitionBy: "$category",
+            sortBy: { date: 1 },
+            output: {
+                runningTotal: { $sum: "$amount", window: { documents: ["unbounded", "current"] } }
+            }
+        }
+    }
+])
 
 // 📌 예제 출력
 // [
